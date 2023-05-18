@@ -1,7 +1,8 @@
 "use client";
 
+import Input from "../../components/inputs/Input";
 import { useCallback, useState } from "react";
-import { useForm, FieldValues } from "react-hook-form";
+import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -20,9 +21,7 @@ const AuthForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { 
-        errors 
-    },
+    formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
@@ -31,7 +30,48 @@ const AuthForm = () => {
     },
   });
 
-  return <div>Auth Form</div>;
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
+
+    if (variant === "REGISTER") {
+      // TODO: Register user
+    }
+
+    if (variant === "LOGIN") {
+      // TODO: Login user
+    }
+
+    const socialAction = (action: string) => {
+      setIsLoading(true);
+
+      // TODO: Social login
+    };
+  };
+
+  return (
+    <div
+      className="
+      mt-8
+      sm:mx-auto
+      sm:w-full
+      sm:max-w-md
+      "
+    >
+      <div
+        className="
+      px-4 
+      py-8 
+      bg-white 
+      shadow 
+      sm:rounded-lg 
+      sm:px-10"
+      >
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          <Input />
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default AuthForm;
